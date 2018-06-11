@@ -22,7 +22,7 @@ import f.base.widget.SystemBarTintManager;
  * Created by DN on 2018/6/11.
  */
 
-public abstract class BaseActivity extends Activity{
+public abstract class BaseActivity extends Activity implements View.OnClickListener{
 
     /** 是否沉浸状态栏**/
     private boolean isSetStatusBar = true;
@@ -106,6 +106,10 @@ public abstract class BaseActivity extends Activity{
      */
     public abstract void widgetClick(View v);
 
+    @Override
+    public void onClick(View v){
+        widgetClick(v);
+    }
     /**
      * 返回，关闭界面
      * @param v
