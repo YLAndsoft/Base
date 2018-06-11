@@ -15,7 +15,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
-import pro.base.com.baselibrary.R;
+import f.base.R;
 
 /**
  * Created by Sai on 15/8/15.

@@ -4,7 +4,8 @@ package f.base.widget;
 
 import android.view.Gravity;
 
-import pro.base.com.baselibrary.R;
+import f.base.R;
+
 
 /**
  * Created by Sai on 15/8/16.

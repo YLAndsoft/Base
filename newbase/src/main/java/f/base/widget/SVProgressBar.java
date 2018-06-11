@@ -11,7 +11,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
-import pro.base.com.baselibrary.R;
+import f.base.R;
 
 
 /**
@@ -74,7 +74,7 @@ public class SVProgressBar extends View {
 
         paint = new Paint();
 
-        TypedArray mTypedArray = context.obtainStyledAttributes(attrs,R.styleable.SVProgressBar);
+        TypedArray mTypedArray = context.obtainStyledAttributes(attrs, R.styleable.SVProgressBar);
 
         // 获取自定义属性和默认值
         roundColor = mTypedArray.getColor(R.styleable.SVProgressBar_roundColor, Color.BLUE);
