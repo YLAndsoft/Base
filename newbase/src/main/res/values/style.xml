@@ -16,4 +16,9 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:background">#00000000</item>
     </style>
+    <style name="anim_pw_button">
+        <item name="android:windowEnterAnimation">@anim/pw_button_in</item>
+        <item name="android:windowExitAnimation">@anim/pw_button_out</item>
+    </style>
+
 </resources>

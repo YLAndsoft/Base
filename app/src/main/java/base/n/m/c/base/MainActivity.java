@@ -2,16 +2,20 @@ package base.n.m.c.base;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
-import f.base.BaseAppCompatActivity;
+import f.base.BaseActivity;
 import f.base.BaseDialog;
+import f.base.view.ProvincePopupWindow;
 
-public class MainActivity extends BaseAppCompatActivity {
+public class MainActivity extends BaseActivity implements ProvincePopupWindow.OnResultClickListener{
 
-    Button dialog1,dialog2,dialog3;
+    Button dialog1,dialog2,dialog3,dialog4;
     private BaseDialog dialog;
+    private LinearLayout rootView;
     @Override
     public void initParms(Intent intent) {
 
@@ -26,22 +30,19 @@ public class MainActivity extends BaseAppCompatActivity {
         dialog1 = (Button) findViewById(R.id.dialog1);
         dialog2 = (Button) findViewById(R.id.dialog2);
         dialog3 = (Button) findViewById(R.id.dialog3);
+        dialog4 = (Button) findViewById(R.id.dialog4);
+        rootView = findViewById(R.id.rootView);
         dialog1.setOnClickListener(this);
         dialog2.setOnClickListener(this);
         dialog3.setOnClickListener(this);
-
+        dialog4.setOnClickListener(this);
     }
 
     @Override
-    public void setListener() {
-
-    }
     public void initListener() {
-
     }
     @Override
     public void initData(Context context) {
-
     }
     @Override
     public void widgetClick(View v) {
@@ -53,7 +54,6 @@ public class MainActivity extends BaseAppCompatActivity {
                         showToast("选择了否！");
                         dialog.dismiss();
                     }
-
                     @Override
                     public void onRigthClick(String content) {
                         showToast("选择了是！");
@@ -92,6 +92,18 @@ public class MainActivity extends BaseAppCompatActivity {
                 });
                 dialog.show();
                 break;
+            case R.id.dialog4:
+                ProvincePopupWindow ppw = new ProvincePopupWindow(MainActivity.this,"province_data.xml");//
+                if(!ppw.isShowing()){
+                    ppw.showPopupWindow(rootView, Gravity.BOTTOM,0,0);
+                }
+                ppw.setListener(MainActivity.this);
+                break;
         }
+    }
+
+    @Override
+    public void onResultClick(String result) {
+        showToast("结果："+result);
     }
 }
