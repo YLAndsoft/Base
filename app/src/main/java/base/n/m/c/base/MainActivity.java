@@ -93,7 +93,7 @@ public class MainActivity extends BaseActivity implements ProvincePopupWindow.On
                 dialog.show();
                 break;
             case R.id.dialog4:
-                ProvincePopupWindow ppw = new ProvincePopupWindow(MainActivity.this,"province_data.xml");//
+                ProvincePopupWindow ppw = new ProvincePopupWindow(MainActivity.this,"");//
                 if(!ppw.isShowing()){
                     ppw.showPopupWindow(rootView, Gravity.BOTTOM,0,0);
                 }

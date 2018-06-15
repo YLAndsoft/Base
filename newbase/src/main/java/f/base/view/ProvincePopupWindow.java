@@ -38,9 +38,9 @@ public class ProvincePopupWindow extends PopupWindow implements View.OnClickList
     private Map<String, ArrayList<String>> mCitisDatasMap = new HashMap<String, ArrayList<String>>();
     private Map<String, ArrayList<String>> mDistrictDatasMap = new HashMap<String, ArrayList<String>>();
     private Context mContext;
-    private String mCurrentProviceName;
-    private String mCurrentCityName;
-    private String mCurrentDistrictName;
+    private String mCurrentProviceName="";
+    private String mCurrentCityName="";
+    private String mCurrentDistrictName="";
 
     private WView mProvincePicker;
     private WView mCityPicker;
