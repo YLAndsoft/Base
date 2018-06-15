@@ -98,11 +98,9 @@ public abstract class BaseLazyLoadFragment extends Fragment implements View.OnCl
      * @param msg
      */
     protected void showToast(String msg){
-        if(Config.isShowToast){
             if(null!=getActivity()){
                 Toast.makeText(getActivity(),msg, Toast.LENGTH_SHORT).show();
             }
-        }
     }
 
     /**
@@ -112,9 +110,7 @@ public abstract class BaseLazyLoadFragment extends Fragment implements View.OnCl
     public static final String TAG1 = "BaseLazyLoadFragment";
 
     protected void showLog(String msg){
-        if(Config.isShowLog){
             Log.i(TAG1,msg);
-        }
     }
 
 

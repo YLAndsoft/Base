@@ -62,11 +62,10 @@ public abstract class BaseActivity extends Activity implements View.OnClickListe
         if(isSetActionBarColor){ //设置通知栏的颜色
             setActionBarColor(mResColor);
         }
-        setContentView(mContextView); //设置布局
-
         if (!isAllowScreenRoate) { //禁止屏幕旋转
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
+        setContentView(mContextView); //设置布局
         initView(mContextView);
         initListener();
         initData(this);
@@ -214,11 +213,9 @@ public abstract class BaseActivity extends Activity implements View.OnClickListe
      * @param msg
      */
     protected void showToast(String msg){
-        if(Config.isShowToast){
             if(null!=getApplicationContext()){
                 Toast.makeText(mContext,msg, Toast.LENGTH_SHORT).show();
             }
-        }
     }
 
     /**
@@ -226,9 +223,7 @@ public abstract class BaseActivity extends Activity implements View.OnClickListe
      * @param msg
      */
     protected void showLog(String msg){
-        if(Config.isShowLog){
             Log.i(TAG,msg);
-        }
     }
 
 

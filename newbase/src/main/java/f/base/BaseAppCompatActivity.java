@@ -19,7 +19,6 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
-import org.xutils.x;
 import java.util.List;
 
 import f.base.widget.SystemBarTintManager;
@@ -59,16 +58,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
             ex.printStackTrace();
             return;
         }
-        if (mAllowFullScreen) {
-            //此设置，只有继承Activity才有效
-            //requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-            //此设置，只有继承AppCompatActivity才有效
-            if (getSupportActionBar() != null){
-                //getSupportActionBar().hide();
-                supportRequestWindowFeature(1);
-            }
-        }
         if (isSetStatusBar) {
             steepStatusBar();
         }
@@ -79,8 +69,18 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
         if (!isAllowScreenRoate) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
+        if (mAllowFullScreen) {
+            //此设置，只有继承Activity才有效
+            //requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+            //此设置，只有继承AppCompatActivity才有效
+            if (getSupportActionBar() != null){
+                getSupportActionBar().hide(); //一个setContentView()后
+                //supportRequestWindowFeature(1);//一个 setContentView()前
+            }
+        }
         initView(mContextView);
-        setListener();
+        initListener();
         initData(this);
     }
     /**
@@ -194,7 +194,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
     /**
      * [设置监听]
      */
-    public abstract void setListener();
+    public abstract void initListener();
 
     /**
      * [业务操作]
@@ -251,10 +251,9 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
      * @param msg
      */
     protected void showToast(String msg){
-        if(Config.isShowToast){
+        if(null!=this){
             Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         }
-
     }
 
     /**
@@ -263,9 +262,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
      */
     public static final String TAG1 = "BaseActivity";
     protected void showLog(String msg){
-        if(Config.isShowLog){
-            Log.i(TAG1,msg);
-        }
+        Log.i(TAG1,msg);
     }
     /**
      * [是否允许全屏]

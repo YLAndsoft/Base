@@ -242,10 +242,9 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements V
      * @param msg
      */
     protected void showToast(String msg){
-        if(Config.isShowToast){
+        if(null!=this){
             Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         }
-
     }
 
     /**
@@ -253,9 +252,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements V
      * @param msg
      */
     protected void showLog(String msg){
-        if(Config.isShowLog){
             Log.i(TAG,msg);
-        }
     }
     /**
      * [是否允许全屏]

@@ -2,7 +2,7 @@
 <resources>
     <color name="white">#ffffff</color>
     <color name="transparent">#00000000</color>
-
+    <color name="gary">#EBEAE8</color>
 
     <!-- 覆盖颜色 -->
     <color name="bgColor_overlay_black">#95000000</color>
