@@ -34,6 +34,7 @@ public class BaseDialog extends Dialog implements View.OnClickListener{
     private String left_txt;
     private String rigth_txt;
     private int dialogState;
+    private int listenerCode;
     private boolean isCanceled = true; //点击屏幕外是否关闭对话框
     private String checkText = "男";//单选框选择的内容，默认为男
 
@@ -51,8 +52,8 @@ public class BaseDialog extends Dialog implements View.OnClickListener{
 
 
     public interface OnDialogClickListener{
-        void onLeftClick();//左边按钮回调
-        void onRigthClick(String content);//右边按钮回调
+        void onLeftClick(int listenerCode);//左边按钮回调
+        void onRigthClick(String content,int listenerCode);//右边按钮回调
     }
 
     /**
@@ -63,7 +64,15 @@ public class BaseDialog extends Dialog implements View.OnClickListener{
      * @param left_txt //左边按钮文字
      * @param rigth_txt //右边按钮文字
      */
-    public BaseDialog(Context context,int dialogState,String title,String msg_content,String left_txt,String rigth_txt,boolean isCanceled,OnDialogClickListener listener) {
+    public BaseDialog(Context context,
+                      int dialogState,
+                      String title,
+                      String msg_content,
+                      String left_txt,
+                      String rigth_txt,
+                      boolean isCanceled,
+                      OnDialogClickListener listener,
+                      int listenerCode) {
         super(context,R.style.MyDialog);
         this.dialogState = dialogState;
         this.title_text = title;
@@ -72,6 +81,7 @@ public class BaseDialog extends Dialog implements View.OnClickListener{
         this.rigth_txt = rigth_txt;
         this.isCanceled = isCanceled;
         this.listener = listener;
+        this.listenerCode = listenerCode;
     }
 
 
@@ -107,15 +117,15 @@ public class BaseDialog extends Dialog implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.left){
-            listener.onLeftClick();
+            listener.onLeftClick(listenerCode);
         }else if(view.getId()==R.id.right){
             if(dialogState==DIALOG_DEFAULT_STATE){
-                listener.onRigthClick("");
+                listener.onRigthClick("",listenerCode);
             }else if(dialogState==DIALOG_EDIT_STATE){
                 String content = edit_content.getText().toString().trim();
-                listener.onRigthClick(content);
+                listener.onRigthClick(content,listenerCode);
             }else if(dialogState==DIALOG_CHECK_STATE){
-                listener.onRigthClick(checkText);
+                listener.onRigthClick(checkText,listenerCode);
             }
         }
     }
