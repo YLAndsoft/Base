@@ -95,7 +95,6 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
 
     /**
      * 插入一项
-     *
      * @param item
      * @param position
      */
@@ -104,6 +103,30 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
         list.add(position, item);
         notifyItemInserted(position);
     }
+
+
+    /**
+     * 插入集合
+     * @param list
+     */
+    public void insertAll(@NonNull List<T> list) {
+        if(null==list||list.size()<=0)return;
+        this.list.addAll(list);
+        updateAll();
+    }
+    /**
+     * 刷新数据
+     * @param list
+     */
+    public void refreshAll(@NonNull List<T> list) {
+        if(null==list||list.size()<=0)return;
+        if(null!=this.list&&this.list.size()>0){
+            this.list.clear();
+        }
+        this.list.addAll(list);
+        updateAll();
+    }
+
 
     /**
      * 删除一项
