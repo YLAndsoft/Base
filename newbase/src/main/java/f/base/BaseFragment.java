@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import f.base.bean.Params;
+import f.base.utils.XutilsHttp;
+
 /**
  * Created by DN on 2017/7/22.
  */
@@ -33,9 +36,13 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
             return null;
         }
         initView();//初始化控件
+        Params params = getParams();
+        getData(params);
         initData_();//加载数据
         return mContextView;
     }
+
+
 
 
     /**
@@ -63,6 +70,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
      * 数据显示
      */
     protected abstract void initData();
+
 
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -96,4 +104,34 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
             Log.i(TAG1,msg);
     }
 
+
+    /**
+     * 获取参数
+     * @return
+     */
+    public abstract Params getParams();
+
+
+    /**
+     * 展示网络数据
+     */
+    protected abstract void setData(String result);
+
+    /**
+     * 获取网络数据
+     * @param params
+     */
+    private void getData(Params params) {
+        if(null==params){return;}
+        XutilsHttp.xUtilsPost(params.getURL(), params.getMap(), new XutilsHttp.XUilsCallBack() {
+            @Override
+            public void onResponse(String result) {
+                setData(result);
+            }
+            @Override
+            public void onFail(String result) {
+                setData(result);
+            }
+        });
+    }
 }
