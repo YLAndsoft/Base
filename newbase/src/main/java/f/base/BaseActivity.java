@@ -16,6 +16,9 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import f.base.bean.Params;
+import f.base.utils.XutilsHttp;
 import f.base.widget.SystemBarTintManager;
 
 /**
@@ -68,6 +71,8 @@ public abstract class BaseActivity extends Activity implements View.OnClickListe
         setContentView(mContextView); //设置布局
         initView(mContextView);
         initListener();
+        Params params = getParams();
+        getData(params);
         initData(this);
     }
 
@@ -257,6 +262,36 @@ public abstract class BaseActivity extends Activity implements View.OnClickListe
     public void setSetActionBarColor(boolean isSetActionBarColor,int resColor) {
         this.isSetActionBarColor = isSetActionBarColor;
         this.mResColor = resColor;
+    }
+
+    /**
+     * 获取参数
+     * @return
+     */
+    public abstract Params getParams();
+
+
+    /**
+     * 展示网络数据
+     */
+    protected abstract void setData(String result);
+
+    /**
+     * 获取网络数据
+     * @param params
+     */
+    private void getData(Params params) {
+        if(null==params){return;}
+        XutilsHttp.xUtilsPost(params.getURL(), params.getMap(), new XutilsHttp.XUilsCallBack() {
+            @Override
+            public void onResponse(String result) {
+                setData(result);
+            }
+            @Override
+            public void onFail(String result) {
+                setData(result);
+            }
+        });
     }
 
 

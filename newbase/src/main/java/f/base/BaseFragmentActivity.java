@@ -22,6 +22,8 @@ import android.widget.Toast;
 import org.xutils.x;
 import java.util.List;
 
+import f.base.bean.Params;
+import f.base.utils.XutilsHttp;
 import f.base.widget.SystemBarTintManager;
 
 
@@ -73,8 +75,10 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements V
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
         initView(mContextView);
-        setListener();
+        initListener();
         initData(this);
+        Params params = getParams();
+        getData(params);
     }
     /**
      * 选择Fragment
@@ -186,7 +190,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements V
     /**
      * [设置监听]
      */
-    public abstract void setListener();
+    public abstract void initListener();
 
     /**
      * [业务操作]
@@ -345,6 +349,34 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements V
         }
         return false;
     }
+    /**
+     * 获取参数
+     * @return
+     */
+    public abstract Params getParams();
 
+
+    /**
+     * 展示网络数据
+     */
+    protected abstract void setData(String result);
+
+    /**
+     * 获取网络数据
+     * @param params
+     */
+    private void getData(Params params) {
+        if(null==params){return;}
+        XutilsHttp.xUtilsPost(params.getURL(), params.getMap(), new XutilsHttp.XUilsCallBack() {
+            @Override
+            public void onResponse(String result) {
+                setData(result);
+            }
+            @Override
+            public void onFail(String result) {
+                setData(result);
+            }
+        });
+    }
 
 }

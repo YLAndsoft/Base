@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import f.base.bean.Params;
+import f.base.utils.XutilsHttp;
+
 /**
  * Created by DN on 2018/1/10.
  */
@@ -69,6 +72,8 @@ public abstract class BaseLazyLoadFragment extends Fragment implements View.OnCl
      */
     private void initData_() {
         initData();
+        Params params = getParams();
+        getData(params);
     }
     /**
      * 控件的初始化
@@ -111,6 +116,36 @@ public abstract class BaseLazyLoadFragment extends Fragment implements View.OnCl
 
     protected void showLog(String msg){
             Log.i(TAG1,msg);
+    }
+
+    /**
+     * 获取参数
+     * @return
+     */
+    public abstract Params getParams();
+
+
+    /**
+     * 展示网络数据
+     */
+    protected abstract void setData(String result);
+
+    /**
+     * 获取网络数据
+     * @param params
+     */
+    private void getData(Params params) {
+        if(null==params){return;}
+        XutilsHttp.xUtilsPost(params.getURL(), params.getMap(), new XutilsHttp.XUilsCallBack() {
+            @Override
+            public void onResponse(String result) {
+                setData(result);
+            }
+            @Override
+            public void onFail(String result) {
+                setData(result);
+            }
+        });
     }
 
 
