@@ -93,14 +93,14 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                l.onViewClick();
+                l.onViewClick(view);
             }
         });
         return this;
     }
 
     public interface OnViewClickListener{
-        void onViewClick();
+        void onViewClick(View view);
     }
 
     /**
