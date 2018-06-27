@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import f.base.bean.Params;
+import f.base.utils.NetworkUtils;
 import f.base.utils.XutilsHttp;
 
 /**
@@ -136,6 +137,7 @@ public abstract class BaseLazyLoadFragment extends Fragment implements View.OnCl
      */
     private void getData(Params params) {
         if(null==params){return;}
+        if(!NetworkUtils.isConnected(mContext)){return;}//网络未连接
         XutilsHttp.xUtilsPost(params.getURL(), params.getMap(), new XutilsHttp.XUilsCallBack() {
             @Override
             public void onResponse(String result) {

@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import f.base.bean.Params;
+import f.base.utils.NetworkUtils;
 import f.base.utils.XutilsHttp;
 import f.base.widget.SystemBarTintManager;
 
@@ -71,9 +72,9 @@ public abstract class BaseActivity extends Activity implements View.OnClickListe
         setContentView(mContextView); //设置布局
         initView(mContextView);
         initListener();
+        initData(this);
         Params params = getParams();
         getData(params);
-        initData(this);
     }
 
     /**
@@ -282,6 +283,7 @@ public abstract class BaseActivity extends Activity implements View.OnClickListe
      */
     private void getData(Params params) {
         if(null==params){return;}
+        if(!NetworkUtils.isConnected(mContext)){return;}//网络未连接
         XutilsHttp.xUtilsPost(params.getURL(), params.getMap(), new XutilsHttp.XUilsCallBack() {
             @Override
             public void onResponse(String result) {

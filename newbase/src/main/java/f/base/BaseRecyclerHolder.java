@@ -88,19 +88,19 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder {
     /**
      * 设置单个view的点击事件
      * */
-    public BaseRecyclerHolder setOnViewClick(int viewId, final OnViewClickListener l){
+    public BaseRecyclerHolder setOnViewClick(int viewId, final Object object, final int position, final OnViewClickListener l){
         View view = getView(viewId);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                l.onViewClick(view);
+                l.onViewClick(view,object,position);
             }
         });
         return this;
     }
 
     public interface OnViewClickListener{
-        void onViewClick(View view);
+        void onViewClick(View view,Object object,int position);
     }
 
     /**
